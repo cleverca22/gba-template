@@ -1,4 +1,3 @@
-declare i32 @putchar(i32)
 declare void @logInitMgba()
 declare void @logOutputMgba(i8 %level, ptr %msg)
 

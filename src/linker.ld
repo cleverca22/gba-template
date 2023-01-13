@@ -6,10 +6,13 @@ MEMORY {
 
 SECTIONS {
   .text : {
-    *(.entry.jmp)
-    *(.entry.header)
+    _text_begin = .;
+    KEEP(*(.entry.jmp))
+    KEEP(*(.entry.header))
     *(.entry.start)
     *(.text)
+    *(.text.*)
+    _text_end = .;
   } > rom
   .stack : {
     _stack_bottom = .;

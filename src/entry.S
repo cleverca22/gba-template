@@ -1,16 +1,19 @@
-.global _start
+#include "asm.h"
+
 
 .section .entry.jmp
-_jumppad:
+FUNCTION(_jumppad)
   b _start
+END_FUNCTION(_jumppad)
 
 .section .entry.start
-_start:
+LOCAL_FUNCTION(_start)
   ldr sp, =_stack
   bl main
   b .
+END_FUNCTION(_start)
 
 .section .text
-.global __aeabi_unwind_cpp_pr0
-__aeabi_unwind_cpp_pr0:
+FUNCTION(__aeabi_unwind_cpp_pr0)
   b .
+END_FUNCTION(__aeabi_unwind_cpp_pr0)
