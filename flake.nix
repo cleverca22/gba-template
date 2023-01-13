@@ -6,9 +6,9 @@
   {
     packages.x86_64-linux.default = pkgs.pkgsCross.arm-embedded.callPackage ./src {};
     packages.x86_64-linux.test-script = pkgs.writeShellScriptBin "test-script" ''
-      cat ${self.packages.x86_64-linux.default}/flash.dis
+      #cat ${self.packages.x86_64-linux.default}/flash.dis
       set -x
-      ${pkgs.mgba}/bin/mgba -2 ${self.packages.x86_64-linux.default}/flash.elf --log-level=127
+      ${pkgs.mgba}/bin/mgba -3 ${self.packages.x86_64-linux.default}/flash.elf --log-level=127
     '';
   };
 }

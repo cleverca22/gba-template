@@ -7,7 +7,7 @@ flash.bin: flash.elf
 flash.dis: flash.elf
 	$(OBJDUMP) -d $< > $@
 
-flash.elf: foo.o entry.o header.o log.o
+flash.elf: foo.o entry.o header.o log.o fb.o
 	$(CC) -o $@ $^ -T linker.ld -nostdlib -fno-exceptions # -Wl,--gc-sections
 
 %.o: %.ll
@@ -21,3 +21,4 @@ install: all
 	#$(OBJDUMP) -t flash.elf | sort -rk5
 	$(NM) flash.elf -S --size-sort|tail
 	grep log_init -A10 flash.dis
+	$(OBJDUMP) -d fb.o

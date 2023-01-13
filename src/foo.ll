@@ -1,12 +1,14 @@
 declare void @logInitMgba()
 declare void @logOutputMgba(i8 %level, ptr %msg)
+declare void @draw()
 
-@.msg = private unnamed_addr constant [9 x i8] c"hellord\0"
+@.msg = private unnamed_addr constant [8 x i8] c"hellord\00"
 
 define void @main() {
   ; call void @logInitMgba()
   call i1 @log_init()
   call void @logOutputMgba(i8 4, ptr @.msg)
+  call void @draw()
   ret void
 }
 
