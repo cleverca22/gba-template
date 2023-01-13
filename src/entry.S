@@ -14,9 +14,3 @@ _start:
 .global __aeabi_unwind_cpp_pr0
 __aeabi_unwind_cpp_pr0:
   b .
-
-.global putchar
-putchar:
-  ldr r1, =0x1234
-  bx lr
-
