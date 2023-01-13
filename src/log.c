@@ -5,11 +5,13 @@
 #define REG_MGBA_FLAGS          (*(volatile uint16_t*)0x04FFF700)
 #define MGBA_LOG_OUT            ((char*)0x04FFF600)
 
+#if 0
 bool logInitMgba(void) {
   REG_MGBA_ENABLE = 0xC0DE;
 
   return REG_MGBA_ENABLE == 0x1DEA;
 }
+#endif
 
 void logOutputMgba(uint8_t level, const char *message) {
   for (int i = 0; message[i] && i < 256; i++) {
