@@ -14,3 +14,4 @@ flash.elf: foo.o entry.o header.o log.o
 install: all
 	mkdir -pv $(out)
 	cp flash.elf flash.dis flash.bin $(out)/
+	hexdump -C --length 0x120 flash.bin

@@ -6,7 +6,7 @@ declare void @logOutputMgba(i8 %level, ptr %msg)
 
 define void @main() {
   call void @logInitMgba()
-  call void @logOutputMgba(i8 2, ptr @.msg)
+  call void @logOutputMgba(i8 4, ptr @.msg)
   ret void
 }
 
