@@ -22,3 +22,18 @@ void logOutputMgba(uint8_t level, const char *message) {
   REG_MGBA_FLAGS = (level - 1) | 0x100;
 }
 
+int puts(const char *s) {
+  logOutputMgba(3, s);
+}
+
+static char buffer[101];
+static int buffer_used = 0;
+
+int putchar(int c) {
+  buffer[buffer_used++] = c;
+  if ((buffer_used == 100) || (c == '\n')) {
+    buffer[buffer_used++] = 0;
+    logOutputMgba(3, buffer);
+    buffer_used = 0;
+  }
+}

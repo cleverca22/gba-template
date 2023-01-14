@@ -14,9 +14,23 @@ SECTIONS {
     *(.text.*)
     _text_end = .;
   } > rom
+
+  .rodata : {
+    *(.rodata)
+    *(.rodata.*)
+  } > rom
+
+  .data : {
+    *(.data)
+  } > iwram AT > rom
+
   .stack : {
     _stack_bottom = .;
     . = . + 1024;
     _stack = .;
   } > iwram
+
+  /DISCARD/ : {
+    *(.ARM.exidx)
+  }
 }

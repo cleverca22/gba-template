@@ -9,6 +9,7 @@ END_FUNCTION(_jumppad)
 .section .entry.start
 LOCAL_FUNCTION(_start)
   ldr sp, =_stack
+  and sp, #0xfffffff0
   bl irq_on
   bl main
   b .

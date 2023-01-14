@@ -7,18 +7,18 @@ flash.bin: flash.elf
 flash.dis: flash.elf
 	$(OBJDUMP) -d $< > $@
 
-flash.elf: foo.o entry.o header.o log.o fb.o
-	$(CC) -o $@ $^ -T linker.ld -nostdlib -fno-exceptions # -Wl,--gc-sections
+flash.elf: foo.o entry.o header.o log.o fb.o printf.o xprintf.o
+	$(CC) -o $@ $^ -T linker.ld -nostdlib -fno-exceptions -lgcc -Wl,-Map=flash.map # -Wl,--gc-sections
 
 %.o: %.ll
 	llc -o $@ --filetype=obj -march=arm -mcpu=arm7tdmi $< -opaque-pointers
 
 install: all
 	mkdir -pv $(out)
-	cp flash.elf flash.dis flash.bin $(out)/
+	cp flash.elf flash.dis flash.bin flash.map $(out)/
 	hexdump -C --length 0x120 flash.bin
 	$(SIZE) flash.elf
-	#$(OBJDUMP) -t flash.elf | sort -rk5
+	$(OBJDUMP) -t flash.elf | sort -rk5
 	$(NM) flash.elf -S --size-sort|tail
 	grep log_init -A10 flash.dis
 	$(OBJDUMP) -d fb.o
